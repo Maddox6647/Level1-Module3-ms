@@ -17,9 +17,10 @@ class ChuckleClicker(tk.Tk):
 
         # TODO: Declare and initialize 2 buttons (tk.Button)
         #  one button for the joke and another for the punchline
-
+        self.buttonjoke = tk.Button(self, text='chuckle clicker', bg='red',  font=('Bitcount Grid Double', 20, 'normal'))
+        self.buttonpunchline = tk.Button(self, text= 'chuckle clicker', bg='green', font=('Bitcount Grid Double', 23, 'normal'))
         # TODO: Place the 2 buttons next to each other (see example image)
-
+        self.buttonjoke.place(relx=0.1, rely=0.1)
         # TODO: Call the joke button's bind() method to call the on_joke()
         #  method when a mouse button is pressed
         #  example: self.joke_button.bind('<ButtonPress>', self.on_joke)
