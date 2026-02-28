@@ -17,7 +17,7 @@ class TypingTutor(tk.Tk):
         #  random letter to type
 
         # TODO: Declare and initialize a label (tk.Label) and set the text to the random letter
-
+        tk.Label()
         # TODO: Place the label in the center of the window
 
         # TODO: Call the label's focus_set() method so key presses can be detected
