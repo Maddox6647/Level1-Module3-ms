@@ -9,10 +9,9 @@ class PigLatinTranslator(tk.Tk):
         super().__init__()
 
         # TODO: Declare and initialize an Entry (tk.Entry) for the input text
-
+        self.Entry(tk.Entry)
         # TODO: Declare and initialize a Button (tk.Button) that will translate
-        #  the input text to pig latin when pressed
-
+        #  the input text to pig latin when pressed.
         # TODO: Declare and initialize an label (tk.Label) for the translated
         #  text
 
