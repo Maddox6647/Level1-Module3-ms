@@ -14,47 +14,54 @@ class Whack(tk.Tk):
         button_width, button_height = self.setup_buttons(num_buttons, columns_per_row)
 
         # TODO: Create a member variable for the list of buttons
-
+        self.buttons = []
         # TODO: Create a member variable for the random mole button and
         #  initialize it to None
-
+        self.molebutton = None
         # TODO: Use a loop to create enough buttons to fill the window.
         #  Use the 'columns_per_row', 'button_width', 'button_height' variables
         #  when calling button.place() to put each button in the correct
         #  position
-        for i in range(num_buttons):
-            row_num = int(i / columns_per_row)
-            col_num = int(i % columns_per_row)
+        for nick in range(num_buttons):
+            row_num = int(nick / columns_per_row)
+            col_num = int(nick % columns_per_row)
             row_y = row_num * button_height
             col_x = col_num * button_width
+
+            button = tk.Button()
+            button.place(x=col_x, y=row_y, h=button_height, w=button_width)
+
 
             # TODO: Call the button's bind() method to call the on_button_press()
             #  method when a mouse button is pressed
             #  example: self.joke_button.bind('<ButtonPress>', self.on_button_press)
-
+            self.button.bind('<ButtonPress>', self.on_button_press)
             # TODO: Add the button to the list of buttons
-
+            buttons = [button]
 
         # TODO: Set the mole button to the output of the random.choice() method
         #  to return a random button from the list of buttons
-
+            self.molebutton = random.choice(seq=buttons)
         # TODO: Call the mole button's config(text='mole!') method to set its
         #  text to 'mole!'
+
+        self.molebutton.config(text="mole!")
 
     def on_button_press(self, event):
         button_pressed = event.widget
         print('button ' + repr(button_pressed) + ' clicked!')
 
         # TODO: return if button pressed is not the mole button!
-
+        if button_pressed != self.molebutton:
+            return
         # TODO: Clear text for current mole button using
         #  the buttons' configure() method
-
+        self.molebutton.config(text="")
         # TODO: Get new random mole button that's different from the current one
-
+        self.molebutton = random.choice(seq=self.buttons)
         # TODO: Change the text for the new mole button using
         #  the buttons' configure() method
-
+        self.molebutton.config(text="mole!")
 
     def setup_buttons(self, num_buttons, columns_per_row):
         # Window size needs to be updated immediately here so the
