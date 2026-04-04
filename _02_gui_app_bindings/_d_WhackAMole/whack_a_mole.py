@@ -7,6 +7,9 @@ import tkinter as tk
 
 class Whack(tk.Tk):
 
+
+
+
     def __init__(self, num_buttons):
         super().__init__()
 
@@ -28,20 +31,20 @@ class Whack(tk.Tk):
             row_y = row_num * button_height
             col_x = col_num * button_width
 
-            button = tk.Button()
-            button.place(x=col_x, y=row_y, h=button_height, w=button_width)
+            button = tk.Button(self)
+            button.place(x=col_x, y=row_y, height=button_height, width=button_width)
 
 
             # TODO: Call the button's bind() method to call the on_button_press()
             #  method when a mouse button is pressed
             #  example: self.joke_button.bind('<ButtonPress>', self.on_button_press)
-            self.button.bind('<ButtonPress>', self.on_button_press)
+            button.bind('<ButtonPress>', self.on_button_press)
             # TODO: Add the button to the list of buttons
-            buttons = [button]
+            self.buttons.append(button)
 
         # TODO: Set the mole button to the output of the random.choice() method
         #  to return a random button from the list of buttons
-            self.molebutton = random.choice(seq=buttons)
+        self.molebutton = random.choice(self.buttons)
         # TODO: Call the mole button's config(text='mole!') method to set its
         #  text to 'mole!'
 
