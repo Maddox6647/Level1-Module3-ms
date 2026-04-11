@@ -14,9 +14,9 @@ class Jeopardy(tk.Tk):
         button_width, button_height, num_buttons = self.setup_buttons(categories)
 
         # TODO: Create a member variable for the list of categories
-
+        self.categories = categories
         # TODO: Create a member variable for the score/money
-
+        self.score = 0
         for i in range(num_buttons):
             row_num = int(i / len(categories))
             col_num = int(i % len(categories))
@@ -27,33 +27,32 @@ class Jeopardy(tk.Tk):
             # Create the category header and buttons where
             # row 0 is the category title
             if row_num == 0:
-                pass
-                # TODO: To get the category name, use the categories member variable and column num
 
+                # TODO: To get the category name, use the categories member variable and column num
+                label = tk.Label(self, text=category.name, bg="blue", fg="white")
                 # TODO: Place the Label using the 'col_x', 'row_y', 'button_width',
                 #  and 'button_height' variables
-
+                label.place(x=col_x, y=row_y, width=button_width, height=button_height)
             elif len(category.questions) > row_num - 1:
                 value = category.questions[row_num - 1].value
 
                 # TODO: Create a tk.Button with the questions' value on the button
-
+                button = tk.Button(self, text=f"${value}")
                 # TODO: Place the Button using the 'col_x', 'row_y', 'button_width',
                 #  and 'button_height' variables
-
+                button.place(x=col_x, y=row_y, width=button_width, height=button_height)
                 # TODO: Call the button's bind() method so the
                 #  on_button_press() method is called when a mouse button is pressed
                 #  example: self.joke_button.bind('<ButtonPress>', self.on_button_press)
-
+                button.bind('<ButtonPress>', self.on_button_press)
                 # TODO: Add the button to the category's list of buttons
-
+                category.buttons.append(button)
 
     def on_button_press(self, event):
         button_pressed = event.widget
         print('button ' + repr(button_pressed) + ' clicked!')
-
         # TODO: Call the ask_question() method with button_pressed as an input
-
+        self.ask_question(button_pressed)
     def ask_question(self, button_pressed):
         for category in self.categories:
             for i, button in enumerate(category.buttons):
@@ -69,6 +68,9 @@ class Jeopardy(tk.Tk):
                         #  the question and get their response. If their response is correct,
                         #  increase the score member variable by the value. Otherwise, subtract
                         #  value from the score
+
+                        jeopardy = []
+                        math_jeopard = Category("Math")
 
 
     def setup_buttons(self, categories):
