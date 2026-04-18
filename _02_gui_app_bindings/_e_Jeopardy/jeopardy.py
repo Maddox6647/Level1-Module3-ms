@@ -54,14 +54,7 @@ class Jeopardy(tk.Tk):
         # TODO: Call the ask_question() method with button_pressed as an input
         self.ask_question(button_pressed)
     def ask_question(self, button_pressed):
-        for category in self.categories:
-            for i, button in enumerate(category.buttons):
-                if button == button_pressed:
-                    if category.questions[i].has_been_asked is False:
-                        category.questions[i].has_been_asked = True
-                        question = category.questions[i].question
-                        answer = category.questions[i].answer
-                        value = category.questions[i].value
+        pass
 
                         # TODO: At this point the question corresponding to the button is found
                         #  Use the 'question', 'answer', and 'value' variables to ask the user
@@ -69,8 +62,7 @@ class Jeopardy(tk.Tk):
                         #  increase the score member variable by the value. Otherwise, subtract
                         #  value from the score
 
-                        jeopardy = []
-                        math_jeopard = Category("Math")
+
 
 
     def setup_buttons(self, categories):
@@ -120,7 +112,7 @@ if __name__ == '__main__':
     # TODO: Use the Category class above to create at least 3 question categories
     #  for your _e_Jeopardy game
 
-    # TODO: For each Category, use the add_question method to add a question, answer, and
+    # TODO: For each Category, use  the add_question method to add a question, answer, and
     #  a value for each question
 
     game = Jeopardy(j_categories)
