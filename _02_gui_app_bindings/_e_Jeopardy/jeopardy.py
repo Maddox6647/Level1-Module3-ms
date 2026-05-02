@@ -17,6 +17,8 @@ class Jeopardy(tk.Tk):
         self.categories = categories
         # TODO: Create a member variable for the score/money
         self.score = 0
+        self.score_label = tk.Label(self, text="Score: $0", font=("Arial", 16))
+        self.score_label.pack(side="")
         for i in range(num_buttons):
             row_num = int(i / len(categories))
             col_num = int(i % len(categories))
@@ -34,10 +36,11 @@ class Jeopardy(tk.Tk):
                 #  and 'button_height' variables
                 label.place(x=col_x, y=row_y, width=button_width, height=button_height)
             elif len(category.questions) > row_num - 1:
-                value = category.questions[row_num - 1].value
+                question_obj = category.questions[row_num - 1]
 
                 # TODO: Create a tk.Button with the questions' value on the button
-                button = tk.Button(self, text=f"${value}")
+                button = tk.Button(self, text=f"${question_obj.value}")
+                button.question = question_obj
                 # TODO: Place the Button using the 'col_x', 'row_y', 'button_width',
                 #  and 'button_height' variables
                 button.place(x=col_x, y=row_y, width=button_width, height=button_height)
@@ -54,7 +57,7 @@ class Jeopardy(tk.Tk):
         # TODO: Call the ask_question() method with button_pressed as an input
         self.ask_question(button_pressed)
     def ask_question(self, button_pressed):
-        pass
+
 
                         # TODO: At this point the question corresponding to the button is found
                         #  Use the 'question', 'answer', and 'value' variables to ask the user
@@ -62,8 +65,34 @@ class Jeopardy(tk.Tk):
                         #  increase the score member variable by the value. Otherwise, subtract
                         #  value from the score
 
+        if not hasattr(button_pressed, "question"):
+            return
+        question_obj = button_pressed.question
 
 
+        question_obj.has_been_asked = True
+
+        user_answer = simpledialog.askstring(
+            "Question",
+            question_obj.question
+        )
+
+        if user_answer is None:
+            return
+
+        if user_answer.strip().lower() == question_obj.answer.lower():
+            self.score += question_obj.value
+            messagebox.showinfo("Correct!", f"+${question_obj.value}")
+        else:
+            self.score -= question_obj.value
+            messagebox.showerror(
+                "Incorrect",
+                f"Correct answer: {question_obj.answer}\n-${question_obj.value}"
+            )
+
+        button_pressed.config(state="disabled", text="---")
+
+        self.score_label.config(text=f"Score: ${self.score}")
 
     def setup_buttons(self, categories):
         # Window size needs to be updated immediately here so the
@@ -111,7 +140,24 @@ if __name__ == '__main__':
 
     # TODO: Use the Category class above to create at least 3 question categories
     #  for your _e_Jeopardy game
+    math_category = Category("Math")
+    math_category.add_question("What is 2 + 2?", "4", 100)
+    math_category.add_question("What is 5 * 6?", "30", 200)
+    math_category.add_question("What is 12 / 3?", "4", 300)
 
+    # Category 2
+    science_category = Category("Science")
+    science_category.add_question("What planet is known as the Red Planet?", "Mars", 100)
+    science_category.add_question("What gas do plants breathe in?", "Carbon dioxide", 200)
+    science_category.add_question("What is H2O?", "Water", 300)
+
+    # Category 3
+    history_category = Category("History")
+    history_category.add_question("Who was the first president of the USA?", "George Washington", 100)
+    history_category.add_question("What year did WW2 end?", "1945", 200)
+    history_category.add_question("What empire built the Colosseum?", "Roman", 300)
+
+    j_categories.extend([math_category, science_category, history_category])
     # TODO: For each Category, use  the add_question method to add a question, answer, and
     #  a value for each question
 
