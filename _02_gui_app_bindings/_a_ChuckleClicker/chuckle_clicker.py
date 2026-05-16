@@ -27,7 +27,7 @@ class ChuckleClicker(tk.Tk):
         # TODO: Call the joke button's bind() method to call the on_joke()
         #  method when a mouse button is pressed
         #  example: self.joke_button.bind('<ButtonPress>', self.on_joke)
-        #self.buttonjoke.bind('<Button Press>', self.on_joke())
+        self.buttonjoke.bind('<Button Press>', self.on_joke())
         # TODO: Call the joke button's bind() method to call the on_punchline()
         #  method when a mouse button is pressed
 
